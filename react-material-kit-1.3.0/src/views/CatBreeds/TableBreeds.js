@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {  Table,  TableHead, TableCell, TableBody, TableRow} from '@material-ui/core';
-
-const baseUrl= 'https://api.thecatapi.com/v1/breeds';
-
-function TableBreeds({ breeds }) {
-    
+import React from 'react';
+import {  Table,  TableHead, TableCell, TableBody, TableRow, TablePagination} from '@material-ui/core';
+import './tableBreeds.scss';
 
 
+function TableBreeds({ breeds, handleChangePage, page  }) {
     return (
         <div>
-                <Table>
+            <h3 className="title">Cat Breeds</h3>
+                <Table className="table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Nombre</TableCell>
@@ -19,49 +17,29 @@ function TableBreeds({ breeds }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {breeds.map(breed => (
-                            <TableRow>
-                                <TableCell>{breed.name}</TableCell>
-                                <TableCell>{breed.origin}</TableCell>
-                                <TableCell>{breed.temperament}</TableCell>
-                                <TableCell>{breed.social_needs}</TableCell>
-                            </TableRow>
-                        ))}
+                    {breeds.map(breed => (
+                        <TableRow>
+                            <TableCell>{breed.name}</TableCell>
+                            <TableCell>{breed.origin}</TableCell>
+                            <TableCell>{breed.temperament}</TableCell>
+                            <TableCell>{breed.social_needs}</TableCell>
+                        </TableRow>
+                    ))}
                     </TableBody>
                 </Table>
+                <TablePagination
+                component="div"
+                count={70}
+                page={page}
+                rowsPerPage={5}
+                onChangePage={handleChangePage} 
+                //onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
             
         </div>
     )
 }
 
-export default TableBreeds
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default TableBreeds;
 
 
