@@ -21,6 +21,7 @@ import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import ViewConfigIcon from '@material-ui/icons/ViewComfy';
 import ListIcon from '@material-ui/icons/List';
 import Label from 'src/components/Label';
+import PetsIcon from '@material-ui/icons/Pets';
 
 export default [
   {
@@ -30,6 +31,11 @@ export default [
         title: 'Overview',
         href: '/overview',
         icon: HomeIcon
+      },
+      {
+        title: 'Cat Breeds',
+        href: '/catbreeds',
+        icon: PetsIcon
       },
       {
         title: 'Dashboards',

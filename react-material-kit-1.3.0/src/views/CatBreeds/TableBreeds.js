@@ -3,7 +3,7 @@ import {  Table,  TableHead, TableCell, TableBody, TableRow, TablePagination} fr
 import './tableBreeds.scss';
 
 
-function TableBreeds({ breeds, handleChangePage, page  }) {
+function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage }) {
     return (
         <div>
             <h3 className="title">Cat Breeds</h3>
@@ -31,9 +31,10 @@ function TableBreeds({ breeds, handleChangePage, page  }) {
                 component="div"
                 count={70}
                 page={page}
-                rowsPerPage={5}
+                rowsPerPage={rowsPerPage} 
+                rowsPerPageOptions={[5, 10, 25, 50, 100]} 
                 onChangePage={handleChangePage} 
-                //onChangeRowsPerPage={handleChangeRowsPerPage}
+                onChangeRowsPerPage={handleChangeRowsPerPage} 
             />
             
         </div>
