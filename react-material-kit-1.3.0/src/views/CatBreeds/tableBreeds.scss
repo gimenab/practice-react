@@ -1,0 +1,23 @@
+
+
+.title {
+    margin: 20px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color: #263238;
+    font-size: 24px;
+    font-weight: 500;
+}
+.table{
+    max-width: 90%;
+    margin-left:auto;
+    margin-right: auto;
+   
+    
+    background-color: #b7c4fdad;
+    
+}
+@media screen and (max-width: 480px) {
+    .breed-table{
+    display: none;
+    }
+}
