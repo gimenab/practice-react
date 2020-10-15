@@ -2,6 +2,8 @@ import React , {useState, useEffect} from 'react';
 import axios from 'axios';
 import TableBreeds from './TableBreeds';
 import BreedList from './BreedList';
+import Filter from './Filter';
+import './index.scss'
 
 function CatBreeds() {
 
@@ -66,7 +68,8 @@ useEffect(()=> {
 
     return (
         <div>
-            
+            <h3 className="title">Cat Breeds</h3>
+            <Filter />
             <TableBreeds
                 breeds={catBreeds}
                 handleChangePage={handleChangePage}

@@ -6,7 +6,6 @@ import './breedList.scss';
 function BreedList({breeds, onElementScroll }) {
     return (
         <div className="breed-list">
-            <h3 className="title">Cat Breeds</h3>
         <div>
     <List className="list"  onScroll={onElementScroll} >
         {breeds.map((breed) => (

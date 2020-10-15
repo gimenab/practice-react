@@ -12,7 +12,7 @@ import './tableBreeds.scss';
 function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage }) {
     return (
         <div className="breed-table"> 
-            <h3 className="title">Cat Breeds</h3>
+            
                 <Table className="table">
                     <TableHead>
                         <TableRow>
