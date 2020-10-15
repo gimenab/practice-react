@@ -1,6 +1,7 @@
 import React , {useState, useEffect} from 'react';
 import axios from 'axios';
 import TableBreeds from './TableBreeds';
+import BreedList from './BreedList';
 
 function CatBreeds() {
 
@@ -49,7 +50,18 @@ useEffect(()=> {
         .catch(err => {
             console.log(err)
         })
-        
+    }
+
+    const onElementScroll = () => {
+        let elementToWatchForScroll = document.getElementsByClassName("list").item(0); 
+    
+        var scrollY = elementToWatchForScroll.scrollHeight - elementToWatchForScroll.scrollTop; 
+        var height = elementToWatchForScroll.offsetHeight;
+        var offset = height - scrollY;
+    
+        if ((offset == 0 || offset == 1)) {
+            handleChangePage('', page + 1)
+        }
     }
 
     return (
@@ -62,6 +74,11 @@ useEffect(()=> {
                 rowsPerPage={rowsPerPage}
                 page={page}
             />
+            <BreedList 
+                breeds={catBreeds}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onElementScroll={onElementScroll}/>
         </div>
     )
 }

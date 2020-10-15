@@ -1,16 +1,22 @@
 import React from 'react';
-import {  Table,  TableHead, TableCell, TableBody, TableRow, TablePagination} from '@material-ui/core';
+import {
+Table,  
+TableHead, 
+TableCell, 
+TableBody, 
+TableRow, 
+TablePagination
+} from '@material-ui/core';
 import './tableBreeds.scss';
-
 
 function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage }) {
     return (
-        <div>
+        <div className="breed-table"> 
             <h3 className="title">Cat Breeds</h3>
                 <Table className="table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Nombre</TableCell>
+                            <TableCell>Name</TableCell>
                             <TableCell>Origen</TableCell>
                             <TableCell>Temperament</TableCell>
                             <TableCell>Social Needs</TableCell>
@@ -34,13 +40,11 @@ function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, 
                 rowsPerPage={rowsPerPage} 
                 rowsPerPageOptions={[5, 10, 25, 50, 100]} 
                 onChangePage={handleChangePage} 
-                onChangeRowsPerPage={handleChangeRowsPerPage} 
+                onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-            
         </div>
     )
 }
 
 export default TableBreeds;
-
 
