@@ -3,16 +3,17 @@ import { List, ListItemAvatar , ListItem, ListItemText, Avatar} from '@material-
 import PetsIcon from '@material-ui/icons/Pets';
 import './breedList.scss';
 
-function BreedList({breeds, onElementScroll }) {
+function BreedList({breeds, onElementScroll,inputSearch,handleInput ,searchInput, filterBreeds}) {
     return (
         <div className="breed-list">
         <div>
-    <List className="list"  onScroll={onElementScroll} >
+    <List className="list"  onScroll={onElementScroll} onChange={filterBreeds} >
         {breeds.map((breed) => (
         <ListItem className="item-list" >
                 
                 <ListItemText className="item-elements"
                 key ={breed}>
+                    
                     <ListItemAvatar><Avatar><PetsIcon /></Avatar></ListItemAvatar>
                     <p>Name - {breed.name}</p>
                     <p>Origin - {breed.origin}</p>
