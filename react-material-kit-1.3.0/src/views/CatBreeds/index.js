@@ -8,6 +8,7 @@ import './index.scss'
 function CatBreeds() {
 
 const [catBreeds, setCatBreeds] = useState([]);
+const [originalCatBreeds, setOriginalCatBreeds] = useState([]);
 const [page, setPage] = useState(0);
 const [rowsPerPage, setRowsPerPage] = useState(5);
 const [inputSearch, setSearch] = useState('');
@@ -17,7 +18,7 @@ useEffect(()=> {
     .then(res => {
             console.log(res);
             setCatBreeds(res.data);
-        
+            setOriginalCatBreeds(res.data)
         })
         .catch(err => {
             console.log(err)
@@ -33,6 +34,7 @@ useEffect(()=> {
                 newArray.push(element)
             })
             setCatBreeds(newArray)
+            setOriginalCatBreeds(newArray)
         })
         .catch(err => {
             console.log(err)
@@ -49,6 +51,7 @@ useEffect(()=> {
                 newArray.push(element)
             })
             setCatBreeds(newArray)
+            setOriginalCatBreeds(newArray)
         })
         .catch(err => {
             console.log(err)
@@ -69,18 +72,15 @@ useEffect(()=> {
 
     const handleInput = (event) => {
         setSearch( event.target.value);
-        filterBreeds(catBreeds, inputSearch);
-        console.log(filterBreeds(catBreeds, event.target.value))
+        let filteredBreeds = filterBreeds(originalCatBreeds, inputSearch);
+        setCatBreeds(filteredBreeds)
+    }
 
+    const filterBreeds = (breeds, inputSearch) => {
+        return breeds.filter(function (breed) {
+            return breed.name.toLowerCase().includes(inputSearch.toLowerCase()); 
+        })
     }
-    
-    const filterBreeds = (breeds, inputSearch)=> {
-        return breeds.filter(function(breed) {
-        return breed.name.toLowerCase().includes(inputSearch.toLowerCase()); 
-    })
-    
-    }
-    
 
     return (
         <div>
