@@ -6,15 +6,9 @@ import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import './filter.scss';
 
-
-function Filter({handleInput, inputValue, inputSearch}) {
-   
-
-
+function Filter({handleInput, inputValue}) {
     return ( 
-        
         <div className="search">
-          
         <FormControl className="input-search" id="input-search">
                 <InputLabel htmlFor="input-with-icon-adornment">Search a breed</InputLabel>
                 <Input
@@ -30,7 +24,6 @@ function Filter({handleInput, inputValue, inputSearch}) {
                 />
             </FormControl> 
         </div>
-        
     )
 }
 

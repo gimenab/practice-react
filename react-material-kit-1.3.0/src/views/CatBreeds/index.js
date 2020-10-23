@@ -71,7 +71,7 @@ useEffect(()=> {
     }
 
     const handleInput = (event) => {
-        setSearch( event.target.value);
+        setSearch (event.target.value);
         let filteredBreeds = filterBreeds(originalCatBreeds, inputSearch);
         setCatBreeds(filteredBreeds)
     }
@@ -81,7 +81,7 @@ useEffect(()=> {
             return breed.name.toLowerCase().includes(inputSearch.toLowerCase()); 
         })
     }
-
+  
     return (
         <div>
             <h3 className="title">Cat Breeds</h3>
@@ -97,8 +97,7 @@ useEffect(()=> {
                 rowsPerPage={rowsPerPage}
                 page={page}
                 handleInput={handleInput}
-                inputValue={inputSearch}
-                filterBreeds={filterBreeds}
+                
             />
             <BreedList 
                 breeds={catBreeds}
@@ -106,9 +105,7 @@ useEffect(()=> {
                 page={page}
                 onElementScroll={onElementScroll}
                 handleInput={handleInput}
-                inputValue={inputSearch}
-                filterBreeds={filterBreeds}/>
-                
+                />
         </div>
     )
 }

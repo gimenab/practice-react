@@ -2,12 +2,11 @@ import React from 'react';
 import { List, ListItemAvatar , ListItem, ListItemText, Avatar} from '@material-ui/core';
 import PetsIcon from '@material-ui/icons/Pets';
 import './breedList.scss';
-
-function BreedList({breeds, onElementScroll,inputSearch,handleInput ,searchInput, filterBreeds}) {
+function BreedList({breeds, onElementScroll}) {
     return (
         <div className="breed-list">
         <div>
-    <List className="list"  onScroll={onElementScroll} onChange={filterBreeds} >
+    <List className="list"  onScroll={onElementScroll}  >
         {breeds.map((breed) => (
         <ListItem className="item-list" >
                 
