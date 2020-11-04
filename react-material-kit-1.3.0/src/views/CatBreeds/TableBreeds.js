@@ -7,8 +7,9 @@ TableBody,
 TableRow,
 TablePagination
 } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import './tableBreeds.scss';
-function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage }) {
+function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, rowsPerPage, handleClick }) {
     return (
         <div className="breed-table" >
 
@@ -23,8 +24,8 @@ function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, 
                     </TableHead >
                     <TableBody >
                     {breeds.map(breed => (
-                        <TableRow>
-                            <TableCell>{breed.name}</TableCell>
+                        <TableRow onClick={() => {handleClick(breed)}}>
+                            <TableCell className="name-link">{breed.name}</TableCell>
                             <TableCell>{breed.origin}</TableCell>
                             <TableCell>{breed.temperament}</TableCell>
                             <TableCell>{breed.social_needs}</TableCell>
@@ -40,6 +41,7 @@ function TableBreeds({ breeds, handleChangePage, page, handleChangeRowsPerPage, 
                 rowsPerPageOptions={[5, 10, 25, 50, 100]}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
+                
             />
         </div>
     )

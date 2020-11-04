@@ -1,8 +1,10 @@
 import React , {useState, useEffect} from 'react';
+import { useParams ,withRouter , useHistory} from 'react-router';
 import axios from 'axios';
 import TableBreeds from './TableBreeds';
 import BreedList from './BreedList';
 import Filter from './Filter';
+import Breed from '../Breed'
 import './index.scss'
 
 function CatBreeds() {
@@ -12,6 +14,9 @@ const [originalCatBreeds, setOriginalCatBreeds] = useState([]);
 const [page, setPage] = useState(0);
 const [rowsPerPage, setRowsPerPage] = useState(5);
 const [inputSearch, setSearch] = useState('');
+const history = useHistory();
+const params = useParams();
+
 
 useEffect(()=> {
     axios.get(`https://api.thecatapi.com/v1/breeds?limit=5&page=0`)
@@ -65,14 +70,14 @@ useEffect(()=> {
         var height = elementToWatchForScroll.offsetHeight;
         var offset = height - scrollY;
     
-        if ((offset == 0 || offset == 1)) {
+        if ((offset === 0 || offset === 1)) {
             handleChangePage('', page + 1)
         }
     }
 
     const handleInput = (event) => {
         setSearch (event.target.value);
-        let filteredBreeds = filterBreeds(originalCatBreeds, inputSearch);
+        let filteredBreeds = filterBreeds(originalCatBreeds, event.target.value);
         setCatBreeds(filteredBreeds)
     }
 
@@ -81,7 +86,15 @@ useEffect(()=> {
             return breed.name.toLowerCase().includes(inputSearch.toLowerCase()); 
         })
     }
-  
+
+    const handleClick = (event)=>{
+        let idBreed = (event.id);
+        history.push(`/breed/${idBreed}`);
+       
+       
+        
+    }
+
     return (
         <div>
             <h3 className="title">Cat Breeds</h3>
@@ -97,6 +110,7 @@ useEffect(()=> {
                 rowsPerPage={rowsPerPage}
                 page={page}
                 handleInput={handleInput}
+                handleClick ={handleClick }
                 
             />
             <BreedList 
@@ -105,6 +119,7 @@ useEffect(()=> {
                 page={page}
                 onElementScroll={onElementScroll}
                 handleInput={handleInput}
+                handleClick ={handleClick }
                 />
         </div>
     )

@@ -1,19 +1,20 @@
 import React from 'react';
 import { List, ListItemAvatar , ListItem, ListItemText, Avatar} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import PetsIcon from '@material-ui/icons/Pets';
 import './breedList.scss';
-function BreedList({breeds, onElementScroll}) {
+function BreedList({breeds, onElementScroll, handleClick}) {
     return (
         <div className="breed-list">
         <div>
     <List className="list"  onScroll={onElementScroll}  >
         {breeds.map((breed) => (
-        <ListItem className="item-list" >
+        <ListItem className="item-list" onClick={() => {handleClick(breed)}} >
                 
                 <ListItemText className="item-elements"
                 key ={breed}>
                     
-                    <ListItemAvatar><Avatar><PetsIcon /></Avatar></ListItemAvatar>
+                    <PetsIcon />
                     <p>Name - {breed.name}</p>
                     <p>Origin - {breed.origin}</p>
                     <p>Temperament - {breed.temperament}</p>
