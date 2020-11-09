@@ -1,10 +1,13 @@
-
+/* eslint-disable semi */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router';
 import { FaDog } from 'react-icons/fa';
 import { CgGirl } from 'react-icons/cg';
 import { GrEmoji } from 'react-icons/gr';
@@ -17,6 +20,7 @@ import './breed.scss';
 function Breed() {
   const [breed, setBreed] = useState([]);
   const { id } = useParams();
+  const history = useHistory('');
 
   useEffect(() => {
     axios.get(`https://api.thecatapi.com/v1/breeds/${id}`)
@@ -28,11 +32,14 @@ function Breed() {
       });
   }, []);
 
+  const handleClick = () => {
+    history.goBack();
+  };
 
   return (
     <div className="grid">
       <p className="title">{breed.name}</p>
-      <Button className="link-button" variant="contained" color="primary">Back to Breeds</Button>
+      <Button className="link-button" onClick={() => { handleClick() }} variant="contained" color="primary">Back to Breeds</Button>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper elevation={3} className="paper">

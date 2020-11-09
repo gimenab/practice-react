@@ -9,7 +9,6 @@ import DashboardAnalyticsView from './views/DashboardAnalytics';
 import DashboardDefaultView from './views/DashboardDefault';
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
-import { List } from 'immutable';
 
 export default [
   {
@@ -76,11 +75,10 @@ export default [
         component: lazy(() => import('src/views/CatBreeds'))
       },
       {
-        path: '/breed/:id',  
+        path: '/breed/:id',
         exact: true,
         component: lazy(() => import('src/views/Breed'))
       },
-        
       {
         path: '/changelog',
         exact: true,
