@@ -15,6 +15,7 @@
     width: 100%;
     padding:20px;
     display: block;
+    margin-bottom: 1rem;
 }
 .title {
     margin-bottom: 20px;
@@ -42,6 +43,12 @@
     color:#7586d1b6;
     text-align: center;
 }
+.breed-text{
+    display:block;
+    margin: auto;
+    padding: auto;
+    
+}
 h4{
     padding:3% 0%;
 }
@@ -50,11 +57,19 @@ h4{
     text-align: center;
     padding: 5% ;
     margin: 1%;
+    margin: auto;
+    padding: auto;
 }
-// .number-info{
-//     padding:20px;
-//     display: block;
-// }
+.photo{
+    padding:1%;
+}
+.breed-image{
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: auto;
+    
+}
 .level{
     color:#f89e8fec;
     font-size: 2rem;
@@ -62,10 +77,6 @@ h4{
     font-family: 'IBM Plex Mono', monospace;
 }
 @media screen and (min-width: 480px) {
-    // .number-info, .text-info{
-    //     display: flex;
-    //     flex-direction:row;
-    // }
     .info{
         width: 25%;
     }

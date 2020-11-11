@@ -15,6 +15,7 @@ function CatBreeds() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [inputSearch, setSearch] = useState('');
   const history = useHistory();
+  
 
   useEffect(() => {
     axios.get('https://api.thecatapi.com/v1/breeds?limit=5&page=0')

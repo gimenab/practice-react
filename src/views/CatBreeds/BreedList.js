@@ -1,6 +1,11 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/jsx-indent */
+/* eslint-disable block-spacing */
+/* eslint-disable react/jsx-tag-spacing */
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { List, ListItemAvatar , ListItem, ListItemText, Avatar} from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import PetsIcon from '@material-ui/icons/Pets';
 import './breedList.scss';
 function BreedList({breeds, onElementScroll, handleClick}) {
@@ -18,6 +23,7 @@ function BreedList({breeds, onElementScroll, handleClick}) {
                     <p>Name - {breed.name}</p>
                     <p>Origin - {breed.origin}</p>
                     <p>Temperament - {breed.temperament}</p>
+                    // eslint-disable-next-line react/jsx-one-expression-per-line
                     <p>Social needs - {breed.social_needs}</p>
                 </ListItemText> 
             </ListItem>
@@ -30,4 +36,4 @@ function BreedList({breeds, onElementScroll, handleClick}) {
     )
 }
 
-export default BreedList
+export default BreedList;
