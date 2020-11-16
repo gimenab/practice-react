@@ -11,11 +11,18 @@
     margin:30px;
     box-sizing: border-box;
 }
+
 .paper{
     width: 100%;
-    padding:20px;
+    padding:1%;
     display: block;
     margin-bottom: 1rem;
+}
+.info{
+    background-color:#b7c4fd36;
+    text-align: center;
+    padding: 5% ;
+    margin: 1%;
 }
 .title {
     margin-bottom: 20px;
@@ -49,17 +56,25 @@
     padding: auto;
     
 }
-h4{
-    padding:3% 0%;
+h3{
+    
+    padding-bottom: 1rem;
+    color:#263238;
+    font-size:1.2rem;
+    font-weight: bolder;
+    
 }
-.info{
-    background-color:#b7c4fd36;
-    text-align: center;
-    padding: 5% ;
-    margin: 1%;
-    margin: auto;
-    padding: auto;
+.page-title{
+    margin:2%;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    color:#263238;
+    font-weight: 500;
+    display: block;
+    
 }
+
+
+
 .photo{
     padding:1%;
 }
