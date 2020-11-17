@@ -75,17 +75,25 @@ function Breed(props) {
       <DetailsBox>
         <Detail title="Temperament" text={breed.temperament} />
         <Detail title="Life Span" text={breed.life_span}>
-          <FavoriteBorderIcon />
+          <FavoriteBorderIcon className="detail-icon" />
         </Detail>
         <Detail title="Origin" text={breed.origin}>
-          <PublicIcon />
+          <PublicIcon className="detail-icon" />
         </Detail>
       </DetailsBox>
       <DetailsBox>
-        <Detail title="Child Friendly" text={breed.child_friendly}><ChildFriendlyIcon /></Detail>
-        <Detail title="Dog Friendly" text={breed.dog_friendly}><PetsIcon /></Detail>
-        <Detail title="Social Needs" text={breed.social_needs}><EmojiPeopleIcon /></Detail>
-        <Detail title="Afection Level" text={breed.affection_level}><FavoriteIcon /></Detail>
+        <Detail title="Child Friendly" text={breed.child_friendly}>
+          <ChildFriendlyIcon className="detail-icon" />
+        </Detail>
+        <Detail title="Dog Friendly" text={breed.dog_friendly}>
+          <PetsIcon className="detail-icon" />
+        </Detail>
+        <Detail title="Social Needs" text={breed.social_needs}>
+          <EmojiPeopleIcon className="detail-icon" />
+        </Detail>
+        <Detail title="Afection Level" text={breed.affection_level}>
+          <FavoriteIcon className="detail-icon" />
+        </Detail>
       </DetailsBox>
     </div>
   );
