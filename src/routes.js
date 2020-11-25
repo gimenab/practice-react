@@ -10,6 +10,7 @@ import DashboardDefaultView from './views/DashboardDefault';
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
+
 export default [
   {
     path: '/',

@@ -4,12 +4,12 @@
 import React from 'react';
 import './detail.scss';
 
-function Detail(props) {
+function Detail({ title, text, children }) {
   return (
     <div className="detail">
-      {props.children}
-      <h3>{props.title}</h3>
-      <p className="detail-text">{props.text}</p>
+      {children}
+      <h3>{title}</h3>
+      <p className="detail-text">{text}</p>
     </div>
   );
 }

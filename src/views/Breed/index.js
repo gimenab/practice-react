@@ -21,14 +21,35 @@ import Detail from 'src/components/DetailsBox/Detail';
 import PageTitle from 'src/components/PageTitle';
 import './index.scss';
 import DetailsBox from 'src/components/DetailsBox/index';
+import DetailsBox2 from 'src/components/DetailsBox2/index';
 
 
-function Breed(props) {
+function Breed() {
   const [breed, setBreed] = useState([]);
   const { id } = useParams('');
   const history = useHistory('');
   const [image, setImage] = useState([]);
-
+  const [details, setDetails] = useState([{}]); // current + DetailBox2
+  const [boxDetail1, setBoxDetail1] = useState([
+    {
+      title: 'Temperament',
+      text: '',
+    },
+  ]);
+  const [boxDetail2, setBoxDetail2] = useState([
+    {
+      title: '',
+      text: ''
+    },
+    {
+      title: '',
+      text: ''
+    },
+    {
+      title: '',
+      text: ''
+    },
+  ])
   useEffect(() => {
     axios
       .get(`https://api.thecatapi.com/v1/breeds/${id}`)
@@ -36,6 +57,50 @@ function Breed(props) {
         setBreed(res.data);
         console.log(res.data);
         showBreedImage(id);
+        setBoxDetail1(
+          [
+            {
+              title: 'Description',
+              text: res.data.description,
+            },
+            {
+              title: 'Temperament',
+              text: res.data.temperament,
+            },
+          ]
+        )
+        console.log(boxDetail1);
+        setBoxDetail2(
+          [
+            {
+              title: 'Temperament',
+              text: res.data.temperament
+            },
+            {
+              title: 'Life Span',
+              text: res.data.life_span
+            },
+            {
+              title: 'Origin',
+              text: res.data.origin
+            },
+          ]
+        )
+        setDetails([
+          {
+            title: 'Temperament',
+            text: res.data.temperament
+          },
+          {
+            title: 'Life Span',
+            text: res.data.life_span
+          },
+          {
+            title: 'Origin',
+            text: res.data.origin
+          },
+        ])
+        console.log(details);
       })
       .catch((err) => {
         console.log(err);
@@ -58,6 +123,7 @@ function Breed(props) {
       });
   };
 
+
   return (
     <div className="grid">
       <Button className="link-button"
@@ -70,9 +136,9 @@ function Breed(props) {
       <PageTitle name={breed.name} />
       <DetailsBox>
         <Detail><img className="detail-image" src={image.url} alt={breed.name} /></Detail>
-        <Detail title="Description" text={breed.description} />
+        <Detail title={boxDetail1[0].title} text={boxDetail1[0].text} />
       </DetailsBox>
-      <DetailsBox>
+      {/* <DetailsBox>
         <Detail title="Temperament" text={breed.temperament} />
         <Detail title="Life Span" text={breed.life_span}>
           <FavoriteBorderIcon className="detail-icon" />
@@ -80,7 +146,36 @@ function Breed(props) {
         <Detail title="Origin" text={breed.origin}>
           <PublicIcon className="detail-icon" />
         </Detail>
-      </DetailsBox>
+      </DetailsBox> */}
+      {/*  2º DetailsBox con  Detail con props.children */}
+
+      {/* <Paper className="testPaper paper flex-container" elevation={3}>
+        <Detail title={boxDetail2[0].title} text={boxDetail2[0].text} />
+        <Detail title={boxDetail2[1].title} text={boxDetail2[1].text} />
+        <Detail title={boxDetail2[2].title} text={boxDetail2[2].text} />
+      </Paper> */}
+       {/* 3º sin detail box */}
+
+         {/* <Paper className="testPaper paper flex-container" elevation={3}>
+        {boxDetail2.map((index) => (
+          <Detail id="test" key={index}>
+            <h3>{index.title}</h3>
+            <p className="detail-text">{index.text}</p>
+          </Detail>
+        ))}
+         </Paper> */}
+        {/* <DetailsBox className="paper flex-container" elevation={3}>
+          {boxDetail2.map((index) => (
+            <Detail key={index}>
+              <h3>{index.title}</h3>
+              <p className="detail-text">{index.text}</p>
+            </Detail>
+          ))}
+        </DetailsBox> */}
+
+      <DetailsBox2 details={details} />
+        {/* 1º sin props children  */}
+
       <DetailsBox>
         <Detail title="Child Friendly" text={breed.child_friendly}>
           <ChildFriendlyIcon className="detail-icon" />

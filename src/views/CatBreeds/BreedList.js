@@ -4,6 +4,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import PetsIcon from '@material-ui/icons/Pets';
 import './breedList.scss';
 
+// eslint-disable-next-line react/prop-types
 function BreedList({ breeds, onElementScroll, handleClick }) {
   return (
     <div className="breed-list">
@@ -30,7 +31,6 @@ Origin -
 Temperament -
                   {breed.temperament}
                 </p>
-                    // eslint-disable-next-line react/jsx-one-expression-per-line
                 <p>
 Social needs -
                   {breed.social_needs}
