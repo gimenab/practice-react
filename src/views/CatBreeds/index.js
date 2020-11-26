@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import axios from 'axios';
+import Header from 'src/components/Header';
 import TableBreeds from './TableBreeds';
 import BreedList from './BreedList';
 import Filter from './Filter';
@@ -15,7 +16,7 @@ function CatBreeds() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [inputSearch, setSearch] = useState('');
   const history = useHistory();
-  
+
 
   useEffect(() => {
     axios.get('https://api.thecatapi.com/v1/breeds?limit=5&page=0')
@@ -89,6 +90,7 @@ function CatBreeds() {
 
   return (
     <div>
+      <Header />
       <h3 className="title">Cat Breeds</h3>
       <Filter
         handleInput={handleInput}

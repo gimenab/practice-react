@@ -241,6 +241,11 @@ export default [
         component: lazy(() => import('src/views/SocialFeed'))
       },
       {
+        path: '/social-network',
+        exact: true,
+        component: lazy(() => import('src/views/SocialNetwork'))
+      },
+      {
         path: '/getting-started',
         exact: true,
         component: lazy(() => import('src/views/GettingStarted'))

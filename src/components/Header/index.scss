@@ -1,26 +1,28 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Righteous&display=swap');
-// font-family: 'Lobster Two', cursive;
-// font-family: 'Righteous', cursive;
-
 .header{
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
-    display:inline-flex;
+    margin-top: 2rem;
+}
 
-}
-.header-title{
-    //float: left;
-    font-family: 'Lobster Two', cursive;
-    font-size: 3rem;
-   // padding-top: 1%;
-   margin : 2%
-    
-}
 .header-logo{
-    width: 25%;
-   // margin: auto;
-    //display:block;
+    width: 30%;
+    display:block;    
+    margin-left: auto;
+    margin-right: auto;
 
 }
+@media (max-width: 768px) { 
+    .header-logo{
+        width: 60%;
+        display:block;    
+        margin-left: auto;
+        margin-right: auto;
+    }
+   
+ 
+ }
+    
+ 

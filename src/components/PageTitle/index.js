@@ -3,11 +3,11 @@ import './index.scss';
 
 
 function PageTitle(props) {
-    return (
-        <div>
-            <h1 className="page-title">{props.name}</h1>
-        </div>
-    )
+  return (
+    <div>
+      <h2 className="page-title">{props.name}</h2>
+    </div>
+  );
 }
 
 export default PageTitle;
