@@ -1,28 +1,22 @@
-
-.header{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-    margin-top: 2rem;
+.header {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  margin-top: 2rem;
 }
 
-.header-logo{
+.header-logo {
+  width: 30%;
+  display:none;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .header-logo {
     width: 30%;
-    display:block;    
+    display: block;
     margin-left: auto;
     margin-right: auto;
-
+  }
 }
-@media (max-width: 768px) { 
-    .header-logo{
-        width: 60%;
-        display:block;    
-        margin-left: auto;
-        margin-right: auto;
-    }
-   
- 
- }
-    
- 

@@ -5,7 +5,7 @@ import './index.scss';
 function PageTitle(props) {
   return (
     <div>
-      <h2 className="page-title">{props.name}</h2>
+      <h1 className="page-title">{props.name}</h1>
     </div>
   );
 }
