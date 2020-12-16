@@ -1,0 +1,17 @@
+
+
+.table{
+    max-width: 90%;
+    margin-left:auto;
+    margin-right: auto;
+    background-color: #b7c4fdad;
+    
+}
+@media screen and (max-width: 480px) {
+    .breed-table{
+    display: none;
+    }
+}
+.name-link{
+    cursor: pointer;
+}

@@ -1,0 +1,22 @@
+
+.item-list{
+    margin:20px;
+    background-color: #b7c4fdad;
+    display: block;
+}
+.listItem{
+    margin:10px;  
+}
+.list{
+    max-height: 600px;
+    overflow-y: scroll;
+    max-width: 95%;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 480px) {
+    .breed-list{
+    display: none;
+    }
+}

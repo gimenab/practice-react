@@ -10,6 +10,7 @@ import DashboardDefaultView from './views/DashboardDefault';
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
 
+
 export default [
   {
     path: '/',
@@ -59,6 +60,7 @@ export default [
       }
     ]
   },
+
   {
     route: '*',
     component: DashboardLayout,
@@ -67,6 +69,16 @@ export default [
         path: '/calendar',
         exact: true,
         component: lazy(() => import('src/views/Calendar'))
+      },
+      {
+        path: '/catbreeds',
+        exact: true,
+        component: lazy(() => import('src/views/CatBreeds'))
+      },
+      {
+        path: '/breed/:id',
+        exact: true,
+        component: lazy(() => import('src/views/Breed'))
       },
       {
         path: '/changelog',
@@ -229,6 +241,11 @@ export default [
         component: lazy(() => import('src/views/SocialFeed'))
       },
       {
+        path: '/social-network',
+        exact: true,
+        component: lazy(() => import('src/views/SocialNetwork'))
+      },
+      {
         path: '/getting-started',
         exact: true,
         component: lazy(() => import('src/views/GettingStarted'))
@@ -237,5 +254,5 @@ export default [
         component: () => <Redirect to="/errors/error-404" />
       }
     ]
-  }
+  },
 ];

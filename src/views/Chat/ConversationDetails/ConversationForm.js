@@ -14,7 +14,7 @@ import SendIcon from '@material-ui/icons/Send';
 import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.common.white,
     display: 'flex',
@@ -49,11 +49,11 @@ function ConversationForm({ className, ...rest }) {
   const handleChange = (event) => {
     event.persist();
     setValue(event.target.value);
-  }
+  };
 
   const handleAttach = () => {
     fileInputRef.current.click();
-  }
+  };
 
   return (
     <div
