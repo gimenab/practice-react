@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Post({
-  id, url, votesNumber, votedImageId, votes, className, ...rest
+  id, url, votesNumber, votedImageId, votes, definitiveVoteValue, balance, className, ...rest
 }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
@@ -133,7 +133,7 @@ function Post({
         {...rest}
         className={clsx(classes.root, className)}
       >
-        {isTheVoteUp ? (
+        { definitiveVoteValue === true ? (
           <IconButton
             className={classes.positiveVote}
             size="medium"
@@ -159,7 +159,7 @@ function Post({
           {votesNumber}
           {votedImageId}
         </Typography>
-        { isTheVoteDown ? (
+        { definitiveVoteValue === false ? (
           <IconButton
             className={classes.negativeVote}
             onClick={handleDeleteVote}
@@ -178,8 +178,7 @@ function Post({
             </IconButton>
           </Tooltip>
         )}
-        <p className="ids">{id}</p>
-
+        <p className="ids">{balance}</p>
       </div>
     </div>
   );
