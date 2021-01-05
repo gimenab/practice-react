@@ -5,13 +5,11 @@ import { makeStyles } from '@material-ui/styles';
 import {
   Typography, IconButton, Tooltip, colors
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined';
-import ThumbDownRoundedIcon from '@material-ui/icons/ThumbDownRounded';
+import { useHistory } from 'react-router';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import './index.scss';
+
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,7 +37,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Post({
-  id, url, votesNumber, votedImageId, votes, definitiveVoteValue, balance, className, ...rest
+  children, id, url, votesNumber, votedImageId, votes, definitiveVoteValue, balance, className, ...rest
 }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
@@ -48,22 +46,25 @@ function Post({
   // const [likes, setLikes] = useState(0);
   const [voteId, setVoteId] = useState('');
   const [voteValue, setVoteValue] = useState(0);
-  const [isTheVoteUp, setIsTheVoteUp] = useState();
-  const [isTheVoteDown, setIsThevoteDown] = useState();
+  const [isTheVoteUp, setIsTheVoteUp] = useState(false);
+  const [isTheVoteDown, setIsTheVoteDown] = useState(false);
+  const [result, setResult] = useState(balance);
+  const user = 'my-user-1234';
+
+  const history = useHistory();
 
   const header = {
     ContentType: 'application/json',
     'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
   };
-
   const data = {
     image_id: `${id}`,
-    sub_id: 'my-user-1234',
+    sub_id: `${user}`,
     value: 1,
   };
   const dataDown = {
     image_id: `${id}`,
-    sub_id: 'my-user-1234',
+    sub_id: `${user}`,
     value: 0,
   };
 
@@ -72,6 +73,7 @@ function Post({
       .then((res) => {
         console.log(res.data);
         setVoteId(res.data.id);
+        setIsTheVoteDown(false);
       })
       .catch((error) => {
         console.log(error);
@@ -82,6 +84,7 @@ function Post({
       .then((res) => {
         console.log(res.data);
         setVoteId(res.data.id);
+        setIsTheVoteUp(false);
       })
       .catch((error) => {
         console.log(error);
@@ -92,48 +95,51 @@ function Post({
     axios.delete(`https://api.thecatapi.com/v1/votes/${voteId}`, { headers: header })
       .then((res) => {
         console.log(res.data);
+        setIsTheVoteUp(false);
+        setIsTheVoteDown(false);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  const handleUnlike = () => {
-    // setLiked(0);
-    setUnliked(true);
-    deleteMyVote(voteId);
-  };
   const handleDeleteVote = () => {
-    // setLiked(0);
     setUnliked(true);
     deleteMyVote(voteId);
+    setResult(balance);
   };
-
-  // new section
   const handleDownVote = () => {
-    setUnliked(false);
-    // setVoteValue(0);
-    setLiked(true);
+    // setUnliked(false);
+    // setLiked(true);
     sendDownVote(voteValue);
-    setIsThevoteDown(true);
+    setIsTheVoteDown(true);
+    setResult(balance - 1);
   };
   const handleUpVote = () => {
-    setUnliked(false);
-    setLiked(true);
-    // setVoteValue(1);
+    // setUnliked(false);
+    // setLiked(true);
     sendUpVote(voteValue);
     setIsTheVoteUp(true);
+    setResult(balance + 1);
   };
 
+  const showFullPost = () => {
+    const idPost = id;
+    history.push(`/full-post/${idPost}`);
+  };
   return (
     <div className="post">
-      <img className="picture" src={url} alt="cat for vote" />
+      <img
+        className="picture"
+        src={url}
+        alt="cat for vote"
+        onClick={showFullPost}
+      />
 
       <div
         {...rest}
         className={clsx(classes.root, className)}
       >
-        { definitiveVoteValue === true ? (
+        { definitiveVoteValue ? (
           <IconButton
             className={classes.positiveVote}
             size="medium"
@@ -155,11 +161,8 @@ function Post({
         <Typography
           color="textSecondary"
           variant="h5"
-        >
-          {votesNumber}
-          {votedImageId}
-        </Typography>
-        { definitiveVoteValue === false ? (
+        />
+        { definitiveVoteValue === false || isTheVoteDown === true ? (
           <IconButton
             className={classes.negativeVote}
             onClick={handleDeleteVote}
@@ -178,7 +181,8 @@ function Post({
             </IconButton>
           </Tooltip>
         )}
-        <p className="ids">{balance}</p>
+        <p className="ids">{result}</p>
+        {children}
       </div>
     </div>
   );

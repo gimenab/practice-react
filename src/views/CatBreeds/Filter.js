@@ -18,7 +18,7 @@ function Filter({ handleInput, inputValue }) {
           value={inputValue}
           startAdornment={(
             <InputAdornment position="start">
-              <SearchIcon />
+           
             </InputAdornment>
                   )}
         />

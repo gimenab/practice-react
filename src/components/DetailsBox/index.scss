@@ -12,8 +12,8 @@
 .paper{
     width: 100%;
     padding:1%;
-    display: inline-block;
-    margin: 1rem;
+    display: flex;
+    // margin: 1rem;
 }
 
 @media (min-width: 576px) {  

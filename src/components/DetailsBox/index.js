@@ -6,7 +6,7 @@ import './index.scss';
 
 function DetailsBox({ children }) {
   return (
-    <Paper elevation={3} className="paper flex-container">{children}</Paper>
+    <Paper elevation={3} className="paper">{children}</Paper>
   );
 }
 export default DetailsBox;

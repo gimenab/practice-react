@@ -1,8 +1,16 @@
 
+.container{
+    margin:2%;
+}
 .title {
     margin: 20px;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     color: #263238;
     font-size: 24px;
     font-weight: 500;
+}
+.flex{
+    display: flex;
+    align-items: flex-end;
+    margin: 2%;
 }

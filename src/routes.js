@@ -116,6 +116,11 @@ export default [
         component: lazy(() => import('src/views/Forms'))
       },
       {
+        path: '/full-post/:id',
+        exact: true,
+        component: lazy(() => import('src/views/FullPost'))
+      },
+      {
         path: '/components/lists',
         exact: true,
         component: lazy(() => import('src/views/Lists'))
@@ -139,6 +144,11 @@ export default [
         path: '/dashboards/default',
         exact: true,
         component: DashboardDefaultView
+      },
+      {
+        path: '/favorites',
+        exact: true,
+        component: lazy(() => import('src/views/Favorites'))
       },
       {
         path: '/invoices/:id',

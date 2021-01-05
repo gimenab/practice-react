@@ -1,13 +1,21 @@
 
 .page-title{
+    width: auto;
     margin:2%;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     color:#263238;
     font-weight: 500;
-    display: block;
+    display: inline;
     padding:2% 0%;
-    text-align: center;
+    // text-align: center;
     font-size: 2rem;
+    align-items: center;
+    margin: 2% 0%;
     
     
+}
+.header-title{
+    float: left;
+    width: auto;
+    height: auto;
 }

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Feed from 'src/components/Feed';
 import PageTitle from 'src/components/PageTitle';
-import Post from 'src/components/Post';
+import Post from 'src/components/Posts';
+import Header from 'src/components/Header';
+
 
 function SocialNetwork() {
   // const [voteId, setVoteId] = useState('');
@@ -17,13 +19,13 @@ function SocialNetwork() {
   };
 
   useEffect(() => {
-    axios.get('https://api.thecatapi.com/v1/images/search?limit=10')
+    axios.get('https://api.thecatapi.com/v1/images/search?limit=20')
       .then((res) => {
         loadVotes(posts).then((votesRes) => {
-          let postsArray = []
+          const postsArray = [];
           res.data.forEach((img) => {
-            let imgVoteIndex = votesRes.findIndex((vote) => (vote.image_id === img.id && vote.sub_id === 'my-user-1234'))
-            let isImgVoted = imgVoteIndex >= 0
+            const imgVoteIndex = votesRes.findIndex((vote) => (vote.image_id === img.id && vote.sub_id === 'my-user-1234'));
+            const isImgVoted = imgVoteIndex >= 0;
             postsArray.push({
               breeds: img.breeds,
               height: img.height,
@@ -34,17 +36,17 @@ function SocialNetwork() {
               voteValue: isImgVoted ? !!votesRes[imgVoteIndex].value : null,
               balance: votesRes.filter((vote) => vote.image_id === img.id).reduce((acc, curr) => {
                 if (curr.value) {
-                  acc += 1
+                  acc += 1;
                 } else {
-                  acc -= 1
+                  acc -= 1;
                 }
-                return acc
+                return acc;
               }, 0)
-            })
-          })
-          setPosts(postsArray)
+            });
+          });
+          setPosts(postsArray);
         }).catch((err) => {
-          console.log(err)
+          console.log(err);
         });
       })
       .catch((err) => {
@@ -53,27 +55,25 @@ function SocialNetwork() {
   }, []);
 
   const loadVotes = async () => {
-    // cargar los votos de cada imagen
     try {
-      const res = await axios.get('https://api.thecatapi.com/v1/votes', { headers: header })
+      const res = await axios.get('https://api.thecatapi.com/v1/votes', { headers: header });
       setVotes(res.data);
-      return res.data
+      return res.data;
       // votesIntoPost(votes);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // const votesIntoPost = () => {
-  // };
-
   return (
-    <div>
-      <PageTitle name="Vote" />
+    <div className="container">
+
+      <Header><PageTitle name="All Cats" /></Header>
+
       <Feed>
         {posts.map((item, post) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Post key={post} url={item.url} id={item.id} balance={item.balance} definitiveVoteValue={item.voteValue}/>
+          <Post key={post} url={item.url} id={item.id} balance={item.balance} definitiveVoteValue={item.voteValue} />
         ))}
       </Feed>
     </div>

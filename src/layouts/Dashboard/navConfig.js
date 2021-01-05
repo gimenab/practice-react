@@ -18,6 +18,7 @@ import PeopleIcon from '@material-ui/icons/PeopleOutlined';
 import PersonIcon from '@material-ui/icons/PersonOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import SettingsIcon from '@material-ui/icons/SettingsOutlined';
+import StarIcon from '@material-ui/icons/Star';
 import ViewConfigIcon from '@material-ui/icons/ViewComfy';
 import ListIcon from '@material-ui/icons/List';
 import Label from 'src/components/Label';
@@ -42,6 +43,11 @@ export default [
         title: 'Cat Social Network',
         href: '/social-network',
         icon: ThumbUpAltIcon
+      },
+      {
+        title: 'Favorites',
+        href: '/favorites',
+        icon: StarIcon
       },
       {
         title: 'Dashboards',

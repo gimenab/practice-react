@@ -8,6 +8,7 @@ import TableBreeds from './TableBreeds';
 import BreedList from './BreedList';
 import Filter from './Filter';
 import './index.scss';
+import PageTitle from 'src/components/PageTitle';
 
 function CatBreeds() {
   const [catBreeds, setCatBreeds] = useState([]);
@@ -89,9 +90,10 @@ function CatBreeds() {
   };
 
   return (
-    <div>
-      <Header />
-      <h3 className="title">Cat Breeds</h3>
+    <div className="container">
+      <Header><PageTitle name="Cat Breeds"></PageTitle></Header>
+      
+
       <Filter
         handleInput={handleInput}
         inputValue={inputSearch}
