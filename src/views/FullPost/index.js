@@ -14,7 +14,7 @@ const header = {
   ContentType: 'application/json',
   'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
 };
-function FullPost() {
+function FullPost({onChangeVote, handleDownVote, handleUpVote, deleteMyVote, sendDownVote, sendUpVote, changeVoteValue}) {
   const { id } = useParams('');
   const history = useHistory('');
   const [fullPost, setFullPost] = useState({});
@@ -28,29 +28,21 @@ function FullPost() {
       .get(`https://api.thecatapi.com/v1/images/${id}`)
       .then((res) => {
         votesOfFullPost(res.data).then((votesFullPost) => {
-          
-          console.log(res.data, 'image')
-          console.log(votesFullPost, 'votes')
-
+          console.log(res.data, 'image');
+          console.log(votesFullPost, 'votes');
+          const postVoted = votesFullPost.findIndex((vote) => (vote.image_id === id && vote.sub_id === user));
+          const isPostVoted = postVoted >= 0;
           setFullPost({
             height: res.data.height,
             id: res.data.id,
             url: res.data.url,
             width: res.data.width,
-            isVotesByCurrentUser: '', // guardar en esta variable si la imagen fue votada (true) o no (false)
-            voteValue: '', // guardar en esta variable si el voto es positivo (true) o negativo (false)
-            balance: '' // guardar en esta variable la cantidad total de votos que tiene esta imagen
+            isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
+            voteValue: isPostVoted ? !!votesFullPost[postVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
+            balance: 2, // guardar en esta variable la cantidad total de votos que tiene esta imagen
           });
 
         });
-        // bringVoteImage();
-        // votesOfFullPost(res.data).then((votesFullPost)= {
-        //     // recorrer array de votos para encontrar coincidencia con id de imagen
-        //     //obtener el valor den index
-        //     //asignar a variable true or false
-        //     // si es true llamar a getVoteBalance
-        // });
-
       })
       .catch((err) => {
         console.log(err);
@@ -60,23 +52,22 @@ function FullPost() {
   /* si utilizo fullPost.id tendre que llamar a la
   funcion una vez ejecutada el setFUllPost o puede ser una función asyncrona */
 
-  // const getVoteBalance = (votesRes) => {
-  //   votesRes.filter((vote) => vote.image_id === fullPost.id).reduce((acc, curr) => {
-  //     if (curr.value) {
-  //       acc += 1;
-  //     } else {
-  //       acc -= 1;
-  //     }
-  //     return acc;
-  //   }, 0);
-  // };
+  const getVoteBalance = (votesRes) => {
+    votesRes.filter((vote) => vote.image_id === fullPost.id).reduce((acc, curr) => {
+      if (curr.value) {
+        acc += 1;
+      } else {
+        acc -= 1;
+      }
+      return acc;
+    }, 0);
+  };
 
   const votesOfFullPost = async () => {
     try {
       const res = await axios.get('https://api.thecatapi.com/v1/votes', { headers: header });
       setVotesFullPost(res.data);
-      const imgVoteIndex = votesFullPost.findIndex((vote) => (vote.image_id === id && vote.sub_id === user));
-      setIsPostVotes(imgVoteIndex);
+      // getVoteBalance();
       return res.data;
     } catch (err) {
       console.log(err);
@@ -113,18 +104,16 @@ function FullPost() {
 
         <Post
           url={fullPost.url}
-          // key={post}
-          // id={item.id} // fullPost.id
-          // url={item.url} //fullPost.url
-          // postIndex={post} // etc
-          // balance={item.balance}
-          // changeVoteValue={onChangeVote}
-          // definitiveVoteValue={item.voteValue}
+          key={fullPost}
+          id={fullPost.id} // fullPost.id
+          postIndex={fullPost} // etc
+          balance={fullPost.balance}
+          changeVoteValue={onChangeVote}
+          definitiveVoteValue={fullPost.voteValue}
+         
         >
-          <Favourite id={fullPost.id} user={user} children={isPostVotes} />
+          <Favourite id={fullPost.id} user={user} />
         </Post>
-        {/* key={post} id={item.id} balance={item.balance} definitiveVoteValue={item.voteValue}  */}
-
       </DetailBox>
 
 

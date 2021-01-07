@@ -41,8 +41,7 @@ function Post({
 }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
-  const [liked, setLiked] = useState();
-  const [unliked, setUnliked] = useState();
+ 
   // const [likes, setLikes] = useState(0);
   const [voteId, setVoteId] = useState('');
   const [voteValue, setVoteValue] = useState(0);
@@ -103,23 +102,21 @@ function Post({
       });
   };
   const handleDeleteVote = () => {
-    setUnliked(true);
-    changeVoteValue(null, postIndex)
+  
+    changeVoteValue(null, postIndex);
     deleteMyVote(voteId);
     setResult(balance);
   };
   const handleDownVote = () => {
-    // setUnliked(false);
-    // setLiked(true);
-    changeVoteValue(false, postIndex)
+
+    changeVoteValue(false, postIndex);
     sendDownVote(voteValue);
     setIsTheVoteDown(true);
     setResult(balance - 1);
   };
   const handleUpVote = () => {
-    // setUnliked(false);
-    // setLiked(true);
-    changeVoteValue(true, postIndex)
+ 
+    changeVoteValue(true, postIndex);
     sendUpVote(voteValue);
     setIsTheVoteUp(true);
     setResult(balance + 1);

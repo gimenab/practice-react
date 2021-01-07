@@ -66,9 +66,9 @@ function SocialNetwork() {
   };
 
   const onChangeVote = (value, index) => {
-    posts[index].voteValue = value
-    setPosts([...posts])
-  }
+    posts[index].voteValue = value;
+    setPosts([...posts]);
+  };
 
   return (
     <div className="container">
