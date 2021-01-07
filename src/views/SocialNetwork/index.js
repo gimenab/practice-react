@@ -65,6 +65,11 @@ function SocialNetwork() {
     }
   };
 
+  const onChangeVote = (value, index) => {
+    posts[index].voteValue = value
+    setPosts([...posts])
+  }
+
   return (
     <div className="container">
 
@@ -73,7 +78,15 @@ function SocialNetwork() {
       <Feed>
         {posts.map((item, post) => (
           // eslint-disable-next-line react/no-array-index-key
-          <Post key={post} url={item.url} id={item.id} balance={item.balance} definitiveVoteValue={item.voteValue} />
+          <Post
+            key={post}
+            id={item.id}
+            url={item.url}
+            postIndex={post}
+            balance={item.balance}
+            changeVoteValue={onChangeVote}
+            definitiveVoteValue={item.voteValue}
+          />
         ))}
       </Feed>
     </div>

@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Post({
-  children, id, url, votesNumber, votedImageId, votes, definitiveVoteValue, balance, className, ...rest
+  children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest
 }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
@@ -104,12 +104,14 @@ function Post({
   };
   const handleDeleteVote = () => {
     setUnliked(true);
+    changeVoteValue(null, postIndex)
     deleteMyVote(voteId);
     setResult(balance);
   };
   const handleDownVote = () => {
     // setUnliked(false);
     // setLiked(true);
+    changeVoteValue(false, postIndex)
     sendDownVote(voteValue);
     setIsTheVoteDown(true);
     setResult(balance - 1);
@@ -117,6 +119,7 @@ function Post({
   const handleUpVote = () => {
     // setUnliked(false);
     // setLiked(true);
+    changeVoteValue(true, postIndex)
     sendUpVote(voteValue);
     setIsTheVoteUp(true);
     setResult(balance + 1);
@@ -162,7 +165,7 @@ function Post({
           color="textSecondary"
           variant="h5"
         />
-        { definitiveVoteValue === false || isTheVoteDown === true ? (
+        { definitiveVoteValue !== null && !definitiveVoteValue ? (
           <IconButton
             className={classes.negativeVote}
             onClick={handleDeleteVote}
