@@ -14,12 +14,16 @@ const header = {
   ContentType: 'application/json',
   'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
 };
-function FullPost({onChangeVote, handleDownVote, handleUpVote, deleteMyVote, sendDownVote, sendUpVote, changeVoteValue}) {
+function FullPost({
+  children, url, postIndex, votesNumber, isVotesByCurrentUser, voteValue,  votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest
+}) {
   const { id } = useParams('');
   const history = useHistory('');
   const [fullPost, setFullPost] = useState({});
   const [votesFullPost, setVotesFullPost] = useState([{}]);
-  const [isPostVotes, setIsPostVotes] = useState();
+  const [isImgVoted, setIsImgVoted] = useState(voteValue);
+  const [result, setResult] = useState(balance); // 01
+  //const [votesByUser, setVotesByUser] = useState([{}]);
 
   const user = 'my-user-1234';
 
@@ -30,38 +34,32 @@ function FullPost({onChangeVote, handleDownVote, handleUpVote, deleteMyVote, sen
         votesOfFullPost(res.data).then((votesFullPost) => {
           console.log(res.data, 'image');
           console.log(votesFullPost, 'votes');
-          const postVoted = votesFullPost.findIndex((vote) => (vote.image_id === id && vote.sub_id === user));
-          const isPostVoted = postVoted >= 0;
+          const indexPostVoted = votesFullPost.findIndex((item) => (item.image_id === id && item.sub_id === user));
+          const isPostVoted = indexPostVoted >= 0;
+          console.log(indexPostVoted);
+          console.log(isPostVoted);
           setFullPost({
             height: res.data.height,
             id: res.data.id,
             url: res.data.url,
             width: res.data.width,
             isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
-            voteValue: isPostVoted ? !!votesFullPost[postVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
-            balance: 2, // guardar en esta variable la cantidad total de votos que tiene esta imagen
+            voteValue: isVotesByCurrentUser ? !!votesFullPost[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
+            balance: votesFullPost.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
+              if (curr.value) {
+                acc += 1;
+              } else {
+                acc -= 1;
+              }
+              return acc;
+            }, 0), // guardar en esta variable la cantidad total de votos que tiene esta imagen
           });
-
         });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-
-  /* si utilizo fullPost.id tendre que llamar a la
-  funcion una vez ejecutada el setFUllPost o puede ser una función asyncrona */
-
-  const getVoteBalance = (votesRes) => {
-    votesRes.filter((vote) => vote.image_id === fullPost.id).reduce((acc, curr) => {
-      if (curr.value) {
-        acc += 1;
-      } else {
-        acc -= 1;
-      }
-      return acc;
-    }, 0);
-  };
 
   const votesOfFullPost = async () => {
     try {
@@ -73,15 +71,10 @@ function FullPost({onChangeVote, handleDownVote, handleUpVote, deleteMyVote, sen
       console.log(err);
     }
   };
-  // const bringVoteImage = async () => {
-  //   try{
-  //     console.log(imgVoteIndex);
 
-  //   }
-  //   catch(err){
-  //     console.log(err);
-  //   }
-  // };
+  const onChangeVotePost = (value) => {
+    fullPost.voteValue = value;
+  };
 
   const handleClick = () => {
     history.goBack();
@@ -108,10 +101,14 @@ function FullPost({onChangeVote, handleDownVote, handleUpVote, deleteMyVote, sen
           id={fullPost.id} // fullPost.id
           postIndex={fullPost} // etc
           balance={fullPost.balance}
-          changeVoteValue={onChangeVote}
+          changeVoteValue={onChangeVotePost}
           definitiveVoteValue={fullPost.voteValue}
-         
         >
+          <p className="ids">
+            {'hello '}
+            {result}
+          </p>
+        <p>{definitiveVoteValue}</p>
           <Favourite id={fullPost.id} user={user} />
         </Post>
       </DetailBox>

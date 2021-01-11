@@ -36,9 +36,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Post({
-  children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest
-}) {
+function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
  
@@ -121,6 +119,7 @@ function Post({
     setIsTheVoteUp(true);
     setResult(balance + 1);
   };
+  
 
   const showFullPost = () => {
     const idPost = id;
