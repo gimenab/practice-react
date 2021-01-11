@@ -39,13 +39,11 @@ const useStyles = makeStyles(() => ({
 function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest }) {
   const classes = useStyles();
   const [voted, setVoted] = useState(false);
- 
   // const [likes, setLikes] = useState(0);
   const [voteId, setVoteId] = useState('');
   const [voteValue, setVoteValue] = useState(0);
   const [isTheVoteUp, setIsTheVoteUp] = useState(false);
   const [isTheVoteDown, setIsTheVoteDown] = useState(false);
-  const [result, setResult] = useState(balance);
   const user = 'my-user-1234';
 
   const history = useHistory();
@@ -68,7 +66,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
   const sendUpVote = () => {
     axios.post('https://api.thecatapi.com/v1/votes', data, { headers: header })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setVoteId(res.data.id);
         setIsTheVoteDown(false);
       })
@@ -79,7 +77,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
   const sendDownVote = () => {
     axios.post('https://api.thecatapi.com/v1/votes', dataDown, { headers: header })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setVoteId(res.data.id);
         setIsTheVoteUp(false);
       })
@@ -91,7 +89,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
   const deleteMyVote = () => {
     axios.delete(`https://api.thecatapi.com/v1/votes/${voteId}`, { headers: header })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIsTheVoteUp(false);
         setIsTheVoteDown(false);
       })
@@ -99,25 +97,22 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
         console.log(error);
       });
   };
+
   const handleDeleteVote = () => {
-  
     changeVoteValue(null, postIndex);
     deleteMyVote(voteId);
-    setResult(balance);
   };
-  const handleDownVote = () => {
 
+  const handleDownVote = () => {
     changeVoteValue(false, postIndex);
     sendDownVote(voteValue);
     setIsTheVoteDown(true);
-    setResult(balance - 1);
   };
+
   const handleUpVote = () => {
- 
     changeVoteValue(true, postIndex);
     sendUpVote(voteValue);
     setIsTheVoteUp(true);
-    setResult(balance + 1);
   };
   
 
@@ -125,6 +120,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
     const idPost = id;
     history.push(`/full-post/${idPost}`);
   };
+  
   return (
     <div className="post">
       <img
@@ -180,7 +176,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
             </IconButton>
           </Tooltip>
         )}
-        <p className="ids">{result}</p>
+        <p className="ids">{balance}</p>
         {children}
       </div>
     </div>

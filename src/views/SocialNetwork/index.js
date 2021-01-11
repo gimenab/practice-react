@@ -56,7 +56,7 @@ function SocialNetwork() {
 
   const loadVotes = async () => {
     try {
-      const res = await axios.get('https://api.thecatapi.com/v1/votes', { headers: header });
+      const res = await axios.get('https://api.thecatapi.com/v1/votes?limit=100000', { headers: header });
       setVotes(res.data);
       return res.data;
       // votesIntoPost(votes);
@@ -67,6 +67,7 @@ function SocialNetwork() {
 
   const onChangeVote = (value, index) => {
     posts[index].voteValue = value;
+    posts[index].balance = value ? posts[index].balance + 1 : posts[index].balance - 1;
     setPosts([...posts]);
   };
 

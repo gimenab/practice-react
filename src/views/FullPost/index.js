@@ -9,7 +9,6 @@ import Favourite from 'src/components/Favourite/index';
 import Header from 'src/components/Header';
 import PageTitle from 'src/components/PageTitle';
 
-
 const header = {
   ContentType: 'application/json',
   'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
@@ -31,30 +30,31 @@ function FullPost({
     axios
       .get(`https://api.thecatapi.com/v1/images/${id}`)
       .then((res) => {
-        votesOfFullPost(res.data).then((votesFullPost) => {
-          console.log(res.data, 'image');
-          console.log(votesFullPost, 'votes');
-          const indexPostVoted = votesFullPost.findIndex((item) => (item.image_id === id && item.sub_id === user));
-          const isPostVoted = indexPostVoted >= 0;
-          console.log(indexPostVoted);
-          console.log(isPostVoted);
-          setFullPost({
-            height: res.data.height,
-            id: res.data.id,
-            url: res.data.url,
-            width: res.data.width,
-            isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
-            voteValue: isVotesByCurrentUser ? !!votesFullPost[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
-            balance: votesFullPost.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
-              if (curr.value) {
-                acc += 1;
-              } else {
-                acc -= 1;
-              }
-              return acc;
-            }, 0), // guardar en esta variable la cantidad total de votos que tiene esta imagen
+        votesOfFullPost(res.data)
+          .then((fetchedVotes) => {
+            // console.log(res.data, 'image');
+            // console.log(fetchedVotes, 'votes');
+            const indexPostVoted = fetchedVotes.findIndex((item) => (item.image_id === id && item.sub_id === user));
+            const isPostVoted = indexPostVoted >= 0;
+            console.log(indexPostVoted);
+            console.log(isPostVoted);
+            setFullPost({
+              height: res.data.height,
+              id: res.data.id,
+              url: res.data.url,
+              width: res.data.width,
+              isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
+              voteValue: isVotesByCurrentUser ? !!fetchedVotes[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
+              balance: fetchedVotes.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
+                if (curr.value) {
+                  acc += 1;
+                } else {
+                  acc -= 1;
+                }
+                return acc;
+              }, 0), // guardar en esta variable la cantidad total de votos que tiene esta imagen
+            });
           });
-        });
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +63,7 @@ function FullPost({
 
   const votesOfFullPost = async () => {
     try {
-      const res = await axios.get('https://api.thecatapi.com/v1/votes', { headers: header });
+      const res = await axios.get('https://api.thecatapi.com/v1/votes?limit=100000', { headers: header });
       setVotesFullPost(res.data);
       // getVoteBalance();
       return res.data;
@@ -74,6 +74,8 @@ function FullPost({
 
   const onChangeVotePost = (value) => {
     fullPost.voteValue = value;
+    fullPost.balance = value ? fullPost.balance + 1 : fullPost.balance - 1
+    setFullPost({...fullPost})
   };
 
   const handleClick = () => {
@@ -93,7 +95,6 @@ function FullPost({
       </Button>
 
       <DetailBox className="fullPost">
-
 
         <Post
           url={fullPost.url}
