@@ -3,7 +3,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import SearchIcon from '@material-ui/icons/Search';
 import './filter.scss';
 
 function Filter({ handleInput, inputValue }) {

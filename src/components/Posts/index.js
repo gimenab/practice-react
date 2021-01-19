@@ -38,12 +38,12 @@ const useStyles = makeStyles(() => ({
 
 function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest }) {
   const classes = useStyles();
-  const [voted, setVoted] = useState(false);
+  // const [voted, setVoted] = useState(false);
   // const [likes, setLikes] = useState(0);
   const [voteId, setVoteId] = useState('');
   const [voteValue, setVoteValue] = useState(0);
-  const [isTheVoteUp, setIsTheVoteUp] = useState(false);
-  const [isTheVoteDown, setIsTheVoteDown] = useState(false);
+  // const [isTheVoteUp, setIsTheVoteUp] = useState(false);
+  // const [isTheVoteDown, setIsTheVoteDown] = useState(false);
   const user = 'my-user-1234';
 
   const history = useHistory();
@@ -68,7 +68,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
       .then((res) => {
         // console.log(res.data);
         setVoteId(res.data.id);
-        setIsTheVoteDown(false);
+        // setIsTheVoteDown(false);
       })
       .catch((error) => {
         console.log(error);
@@ -79,7 +79,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
       .then((res) => {
         // console.log(res.data);
         setVoteId(res.data.id);
-        setIsTheVoteUp(false);
+        // setIsTheVoteUp(false);
       })
       .catch((error) => {
         console.log(error);
@@ -89,9 +89,9 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
   const deleteMyVote = () => {
     axios.delete(`https://api.thecatapi.com/v1/votes/${voteId}`, { headers: header })
       .then((res) => {
-        // console.log(res.data);
-        setIsTheVoteUp(false);
-        setIsTheVoteDown(false);
+        console.log(res.data);
+        // setIsTheVoteUp(false);
+        // setIsTheVoteDown(false);
       })
       .catch((error) => {
         console.log(error);
@@ -105,22 +105,23 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
 
   const handleDownVote = () => {
     changeVoteValue(false, postIndex);
-    sendDownVote(voteValue);
-    setIsTheVoteDown(true);
+    sendDownVote();
+    // setIsTheVoteDown(true);
   };
 
   const handleUpVote = () => {
     changeVoteValue(true, postIndex);
-    sendUpVote(voteValue);
-    setIsTheVoteUp(true);
+    sendUpVote();
+    // setIsTheVoteUp(true);
   };
-  
+
+
 
   const showFullPost = () => {
     const idPost = id;
     history.push(`/full-post/${idPost}`);
   };
-  
+
   return (
     <div className="post">
       <img

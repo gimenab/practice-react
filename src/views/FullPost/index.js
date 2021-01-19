@@ -14,15 +14,15 @@ const header = {
   'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
 };
 function FullPost({
-  children, url, postIndex, votesNumber, isVotesByCurrentUser, voteValue,  votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest
+  children, url, postIndex, votesNumber, isVotesByCurrentUser, voteValue, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest
 }) {
   const { id } = useParams('');
   const history = useHistory('');
   const [fullPost, setFullPost] = useState({});
   const [votesFullPost, setVotesFullPost] = useState([{}]);
   const [isImgVoted, setIsImgVoted] = useState(voteValue);
-  const [result, setResult] = useState(balance); // 01
-  //const [votesByUser, setVotesByUser] = useState([{}]);
+  // const [result, setResult] = useState(balance); // 01
+  // const [votesByUser, setVotesByUser] = useState([{}]);
 
   const user = 'my-user-1234';
 
@@ -44,7 +44,7 @@ function FullPost({
               url: res.data.url,
               width: res.data.width,
               isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
-              voteValue: isVotesByCurrentUser ? !!fetchedVotes[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
+              voteValue: isPostVoted ? !!fetchedVotes[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
               balance: fetchedVotes.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
                 if (curr.value) {
                   acc += 1;
@@ -74,8 +74,9 @@ function FullPost({
 
   const onChangeVotePost = (value) => {
     fullPost.voteValue = value;
-    fullPost.balance = value ? fullPost.balance + 1 : fullPost.balance - 1
-    setFullPost({...fullPost})
+    console.log(value);
+    fullPost.balance = value ? fullPost.balance + 1 : fullPost.balance - 1;
+    setFullPost({ ...fullPost });
   };
 
   const handleClick = () => {
@@ -106,10 +107,9 @@ function FullPost({
           definitiveVoteValue={fullPost.voteValue}
         >
           <p className="ids">
-            {'hello '}
-            {result}
+            {balance}
           </p>
-        <p>{definitiveVoteValue}</p>
+          <p>{definitiveVoteValue}</p>
           <Favourite id={fullPost.id} user={user} />
         </Post>
       </DetailBox>

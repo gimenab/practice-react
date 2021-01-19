@@ -19,9 +19,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center'
   },
-  likeButton: {},
+  likeButton: {
+    paddingLeft: '20px',
+  },
   likedButton: {
-    color: colors.red[600]
+    color: colors.red[600],
+    paddingLeft: '20px',
   },
 
 }));

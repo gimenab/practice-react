@@ -9,6 +9,7 @@ import DashboardAnalyticsView from './views/DashboardAnalytics';
 import DashboardDefaultView from './views/DashboardDefault';
 import OverviewView from './views/Overview';
 import PresentationView from './views/Presentation';
+import CatUniverse from './views/CatUniverse';
 
 
 export default [
@@ -74,6 +75,11 @@ export default [
         path: '/catbreeds',
         exact: true,
         component: lazy(() => import('src/views/CatBreeds'))
+      },
+      {
+        path: '/catuniverse',
+        exact: true,
+        component: lazy(() => import('src/views/CatUniverse'))
       },
       {
         path: '/breed/:id',

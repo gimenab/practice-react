@@ -25,6 +25,7 @@ import Label from 'src/components/Label';
 import PetsIcon from '@material-ui/icons/Pets';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
+
 export default [
   {
     subheader: 'Pages',
@@ -32,6 +33,11 @@ export default [
       {
         title: 'Overview',
         href: '/overview',
+        icon: HomeIcon
+      },
+      {
+        title: 'CatUniverse',
+        href: '/catuniverse',
         icon: HomeIcon
       },
       {
