@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
+/* eslint-disable no-const-assign */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Feed from 'src/components/Feed';
 import PageTitle from 'src/components/PageTitle';
 import Post from 'src/components/Posts';
 import Header from 'src/components/Header';
-import Button from '@material-ui/core/Button';
+
 
 
 function SocialNetwork() {
@@ -136,27 +138,26 @@ function SocialNetwork() {
         const array2 = [];
         const array3 = [];
         const array4 = [];
-        const checkingsize = []
+        const checkingsize = [];
         const imageOfArray1 = false;
-          const imageOfArray2 = false;
-          const imageOfArray3 = false;
-          const imageOfArray4 = false;
+        const imageOfArray2 = false;
+        const imageOfArray3 = false;
+        const imageOfArray4 = false;
         response.data.forEach((element) => {
           const widthSize = element.width;
           const heigthtSize = element.height;
-          
+
           if (widthSize < 400 && heigthtSize < 510) {
             imageOfArray1 = true;
-            console.log(imageOfArray1)
+            console.log(imageOfArray1);
             checkingsize.push(imageOfArray1);
           } else if (widthSize > 460) {
             imageOfArray2 = true;
-            console.log(imageOfArray2)
+            console.log(imageOfArray2);
             checkingsize.push(imageOfArray2);
           } else if (heigthtSize > 580) {
             imageOfArray3 = true;
             checkingsize.push(imageOfArray3);
-
           } else {
             imageOfArray4 = true;
             checkingsize.push(imageOfArray4);
@@ -167,7 +168,6 @@ function SocialNetwork() {
         console.log(err);
       });
   };
-
 
 
   const onChangeVote = (value, index) => {

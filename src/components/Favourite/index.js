@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Favourite({
-  className, children, id, user, ...rest
+  className, id, user, ...rest
 }) {
   const header = {
     ContentType: 'application/json',
@@ -116,7 +116,6 @@ function Favourite({
           </IconButton>
         </Tooltip>
       )}
-      {children}
 
     </div>
   );

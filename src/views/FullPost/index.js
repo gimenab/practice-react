@@ -71,6 +71,7 @@ function FullPost({
       console.log(err);
     }
   };
+  
 
   const onChangeVotePost = (value) => {
     fullPost.voteValue = value;
