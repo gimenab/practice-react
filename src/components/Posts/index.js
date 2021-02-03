@@ -115,8 +115,6 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
     // setIsTheVoteUp(true);
   };
 
-
-
   const showFullPost = () => {
     const idPost = id;
     history.push(`/full-post/${idPost}`);

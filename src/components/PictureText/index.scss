@@ -1,5 +1,4 @@
-
-.fav {
+.picture-text {
     width: 100%;
     display: block;
     margin-right: auto;
@@ -9,8 +8,8 @@
     margin-right: auto;
     // opacity: 0.9;
   }
-
-img.picture {
+ 
+  img.picture {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -19,14 +18,9 @@ img.picture {
     margin-right: auto;
     // background-size: cover;
   }
-@media (min-width: 768px) { 
-    .feed{
-        display: flex;
-        }
-   
-}
-@media (min-width: 768px) {
-    .fav {
+
+  @media (min-width: 768px) {
+    .picture-text {
       padding: 1%;
       width: 49.99999%;
       float: left;
@@ -40,7 +34,7 @@ img.picture {
   }
   }
   @media (min-width: 992px) {
-    .fav {
+    .picture-text {
       padding: 1%;
       width: 32.99999%;
     }
@@ -53,7 +47,7 @@ img.picture {
     }
   }
   @media (min-width: 1200px) {
-    .fav {
+    .picture-text {
       padding: 1%;
       width: 24.99999%;
     }
@@ -65,3 +59,4 @@ img.picture {
       // background-size: cover;
     }
   }
+  

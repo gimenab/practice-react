@@ -6,6 +6,7 @@ import Feed from 'src/components/Feed';
 import PageTitle from 'src/components/PageTitle';
 import Post from 'src/components/Posts';
 import Header from 'src/components/Header';
+import './index.scss';
 
 
 

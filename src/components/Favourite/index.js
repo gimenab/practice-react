@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import './index.scss';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import {
-  Typography,
-  Button,
   IconButton,
   Tooltip,
   colors
@@ -18,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center'
-  },
+},
   likeButton: {
     paddingLeft: '20px',
   },
@@ -30,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Favourite({
-  className, id, user, ...rest
+  className, id, user, isFavActive , ...rest
 }) {
   const header = {
     ContentType: 'application/json',
@@ -41,14 +38,15 @@ function Favourite({
     sub_id: `${user}`,
   };
   const classes = useStyles();
-  const [isPostSaveAsFavorite, setIsPostSaveAsFavorite] = useState();
+  // const [isPostSaveAsFavorite, setIsPostSaveAsFavorite] = useState();
+
   const [idFavorite, setIdFavorite] = useState();
 
 
   useEffect(() => {
     axios.get('https://api.thecatapi.com/v1/favourites', { headers: header })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -58,30 +56,22 @@ function Favourite({
   const addFavoritePost = () => {
     axios.post('https://api.thecatapi.com/v1/favourites', data, { headers: header })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setIdFavorite(res.data.id);
-        setIsPostSaveAsFavorite(true);
+        // setIsPostSaveAsFavorite(true);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const getFavoriteId = () => {
-    axios.get(`https://api.thecatapi.com/v1/favourites/${idFavorite}`, { headers: header })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
 
   const deleteFavouritePost = () => {
-    axios.delete(`http://api.thecatapi.com/v1/favourites/${idFavorite}`, { headers: header })
+    axios.delete(`http://api.thecatapi.com/v1/favourites/${id}`, { headers: header })
       .then((res) => {
-        console.log(res.data);
-        setIsPostSaveAsFavorite(false);
+        // console.log(res.data);
+        // setIsPostSaveAsFavorite(false);
       })
       .catch((err) => {
         console.log(err);
@@ -94,7 +84,7 @@ function Favourite({
       className={clsx(classes.root, className)}
     >
 
-      {isPostSaveAsFavorite ? (
+      {isFavActive ? (
         <Tooltip title="remove">
           <IconButton
             className={classes.likedButton}
