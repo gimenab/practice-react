@@ -10,12 +10,13 @@ import {
 } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import { FilterNone, Image, NoEncryption } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center'
-},
+  },
   likeButton: {
     paddingLeft: '20px',
   },
@@ -23,11 +24,14 @@ const useStyles = makeStyles((theme) => ({
     color: colors.red[600],
     paddingLeft: '20px',
   },
+  removeImg: {
+    display: 'none'
+  }
 
 }));
 
 function Favourite({
-  className, id, user, isFavActive , ...rest
+  className, id, user, favorites, isFavActive, idImage, ...rest
 }) {
   const header = {
     ContentType: 'application/json',
@@ -43,21 +47,22 @@ function Favourite({
   const [idFavorite, setIdFavorite] = useState();
 
 
-  useEffect(() => {
-    axios.get('https://api.thecatapi.com/v1/favourites', { headers: header })
-      .then((res) => {
-        // console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('https://api.thecatapi.com/v1/favourites', { headers: header })
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   const addFavoritePost = () => {
     axios.post('https://api.thecatapi.com/v1/favourites', data, { headers: header })
       .then((res) => {
         // console.log(res.data);
         setIdFavorite(res.data.id);
+        isFavActive(true);
         // setIsPostSaveAsFavorite(true);
       })
       .catch((err) => {
@@ -66,18 +71,17 @@ function Favourite({
   };
 
 
-
   const deleteFavouritePost = () => {
-    axios.delete(`http://api.thecatapi.com/v1/favourites/${id}`, { headers: header })
+    axios.delete(`https://api.thecatapi.com/v1/favourites/${id}`, { headers: header })
       .then((res) => {
-        // console.log(res.data);
-        // setIsPostSaveAsFavorite(false);
+        console.log(res.data);
+    
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-  
+  }
+
   return (
     <div
       {...rest}

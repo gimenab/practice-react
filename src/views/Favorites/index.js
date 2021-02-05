@@ -6,9 +6,12 @@ import PictureText from 'src/components/PictureText';
 import Favourite from 'src/components/Favourite';
 import Image from 'src/components/Image';
 import Feed from 'src/components/Feed';
+import { makeStyles } from '@material-ui/styles';
+import './index.scss';
+
 import axios from 'axios';
 
-function Favorites(showFullPost, deleteFavoritePost) {
+function Favorites() {
   const header = {
     ContentType: 'application/json',
     'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
@@ -46,10 +49,15 @@ function Favorites(showFullPost, deleteFavoritePost) {
       });
   }, []);
 
+  const handleClick = (event) => {
+    const favToRemove =(event);
+    const array = favorites.filter((favorite => favorite.idFav !== favToRemove))
+    setFavorites(array);
+  }
+
   return (
     <div className="container">
-      {console.log(favImages)}
-      {/* {console.log(favorites)} */}
+      {console.log(favorites)}
 
 
       <Header><PageTitle name="All Cats" /></Header>
@@ -65,7 +73,12 @@ function Favorites(showFullPost, deleteFavoritePost) {
           <Favourite
             id={item.idFav}
             user={user}
-            isFavActive
+            isFavActive//cambiar la condicion para cambiar el estilo de la imagen
+            onClick={()=> { handleClick(item.idFav);}}
+
+
+            index={item}
+           
           />
         </div>
         // works
