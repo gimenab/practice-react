@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Favourite({
-  className, id, user, favorites, isFavActive, idImage, ...rest
+  className, id, user, favorites, isFavActive, onFavClick, idImage, ...rest
 }) {
   const header = {
     ContentType: 'application/json',
@@ -50,6 +50,7 @@ function Favourite({
     axios.post('https://api.thecatapi.com/v1/favourites', data, { headers: header })
       .then((res) => {
         setIdFavorite(res.data.id); 
+        onFavClick();
       })
       .catch((err) => {
         console.log(err);
@@ -61,7 +62,7 @@ function Favourite({
     axios.delete(`https://api.thecatapi.com/v1/favourites/${id}`, { headers: header })
       .then((res) => {
         console.log(res.data);
-    
+        //actualizar el valor de isFavActive
       })
       .catch((err) => {
         console.log(err);

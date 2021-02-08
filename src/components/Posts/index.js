@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest }) {
+function Post({ children, id, url, postIndex, votesNumber, votedImageId, isFavActive, favourites, votes, definitiveVoteValue, balance, changeVoteValue, className, ...rest }) {
   const classes = useStyles();
   // const [voted, setVoted] = useState(false);
   // const [likes, setLikes] = useState(0);
@@ -177,6 +177,7 @@ function Post({ children, id, url, postIndex, votesNumber, votedImageId, votes, 
         )}
         <p className="ids">{balance}</p>
         {children}
+       
       </div>
     </div>
   );
