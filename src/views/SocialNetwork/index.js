@@ -8,8 +8,6 @@ import Post from 'src/components/Posts';
 import Header from 'src/components/Header';
 import './index.scss';
 
-
-
 function SocialNetwork() {
   // const [voteId, setVoteId] = useState('');
   const [votes, setVotes] = useState([{
@@ -23,8 +21,7 @@ function SocialNetwork() {
   };
 
   useEffect(() => {
-    filterImageBySize3();
-    axios.get('https://api.thecatapi.com/v1/images/search?limit=5')
+    axios.get('https://api.thecatapi.com/v1/images/search?limit=20')
       .then((res) => {
         console.log(res.data);
         loadVotes(posts).then((votesRes) => {
@@ -72,104 +69,6 @@ function SocialNetwork() {
   };
 
 
-  // const filterImageBySize = () => {
-  //   axios.get('https://api.thecatapi.com/v1/images/search?limit=4')
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const mobileImages = [];
-  //       const tabletImages = [];
-  //       const largeImages = [];
-  //       const otherSizes = [];
-  //       response.data.forEach((element) => {
-  //         if (element.width < 400 && element.height < 510) {
-  //           mobileImages.push(element);
-  //           console.log(mobileImages, 'mobile !!!!');
-  //         } else if (element.width > 460) {
-  //           tabletImages.push(element);
-  //           console.log(tabletImages, 'tablet !!!!');
-  //         } else if ( element.height > 580) {
-  //           largeImages.push(element);
-  //           console.log(largeImages, 'large!!!');
-  //         } else {
-  //           otherSizes.push(element);
-  //           console.log(otherSizes, 'others!!!!');
-  //         }
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  // const filterImageBySize2 = () => {
-  //   axios.get('https://api.thecatapi.com/v1/images/search?limit=4')
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const mobileImages = [];
-  //       const tabletImages = [];
-  //       const largeImages = [];
-  //       const otherSizes = [];
-  //       response.data.forEach((element) => {
-  //         const widthSize = element.width;
-  //         const eigthtSize = element.height;
-  //         if (widthSize < 400 && eigthtSize < 510) {
-  //           mobileImages.push(element);
-  //           console.log(mobileImages, 'mobile !!!!');
-  //         } else if (widthSize > 460 && eigthtSize > 510) {
-  //           tabletImages.push(element);
-  //           console.log(tabletImages, 'tablet !!!!');
-  //         } else if ((widthSize > 400 && widthSize < 460) && eigthtSize > 580) {
-  //           largeImages.push(element);
-  //           console.log(largeImages, 'large!!!');
-  //         } else {
-  //           otherSizes.push(element);
-  //           console.log(otherSizes, 'others!!!!');
-  //         }
-  //       });
-  //       console.log(mobileImages,largeImages,tabletImages, otherSizes)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  const filterImageBySize3 = () => {
-    axios.get('https://api.thecatapi.com/v1/images/search?limit=4')
-      .then((response) => {
-        console.log(response.data);
-        const array1 = [];
-        const array2 = [];
-        const array3 = [];
-        const array4 = [];
-        const checkingsize = [];
-        const imageOfArray1 = false;
-        const imageOfArray2 = false;
-        const imageOfArray3 = false;
-        const imageOfArray4 = false;
-        response.data.forEach((element) => {
-          const widthSize = element.width;
-          const heigthtSize = element.height;
-
-          if (widthSize < 400 && heigthtSize < 510) {
-            imageOfArray1 = true;
-            console.log(imageOfArray1);
-            checkingsize.push(imageOfArray1);
-          } else if (widthSize > 460) {
-            imageOfArray2 = true;
-            console.log(imageOfArray2);
-            checkingsize.push(imageOfArray2);
-          } else if (heigthtSize > 580) {
-            imageOfArray3 = true;
-            checkingsize.push(imageOfArray3);
-          } else {
-            imageOfArray4 = true;
-            checkingsize.push(imageOfArray4);
-          }
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
 
   const onChangeVote = (value, index) => {
     posts[index].voteValue = value;
@@ -181,14 +80,7 @@ function SocialNetwork() {
     <div className="container">
 
       <Header><PageTitle name="All Cats" /></Header>
-      {/* <Button
-        className="link-button"
-        onClick={() => { filterImageBySize2(); }}
-        variant="contained"
-        color="primary"
-      >
-          filter images
-      </Button> */}
+    
 
       <Feed>
         {posts.map((item, post) => (

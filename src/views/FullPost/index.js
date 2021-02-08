@@ -9,6 +9,7 @@ import Favourite from 'src/components/Favourite/index';
 import Header from 'src/components/Header';
 import PageTitle from 'src/components/PageTitle';
 
+
 const header = {
   ContentType: 'application/json',
   'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
@@ -21,6 +22,7 @@ function FullPost({
   const [fullPost, setFullPost] = useState({});
   const [votesFullPost, setVotesFullPost] = useState([{}]);
   const [isImgVoted, setIsImgVoted] = useState(voteValue);
+  const [isPostSavedByUser, setIsPostSavedByUser] = useState ();
   // const [result, setResult] = useState(balance); // 01
   // const [votesByUser, setVotesByUser] = useState([{}]);
 
@@ -36,13 +38,13 @@ function FullPost({
             // console.log(fetchedVotes, 'votes');
             const indexPostVoted = fetchedVotes.findIndex((item) => (item.image_id === id && item.sub_id === user));
             const isPostVoted = indexPostVoted >= 0;
-            console.log(indexPostVoted);
-            console.log(isPostVoted);
+            isPostSaveAsFav(id);
             setFullPost({
               height: res.data.height,
               id: res.data.id,
               url: res.data.url,
               width: res.data.width,
+              isFavActive: isPostSavedByUser !== undefined? true : false,
               isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
               voteValue: isPostVoted ? !!fetchedVotes[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
               balance: fetchedVotes.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
@@ -56,10 +58,14 @@ function FullPost({
             });
           });
       })
+     
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  console.log(isPostSavedByUser);
+
+
 
   const votesOfFullPost = async () => {
     try {
@@ -72,6 +78,20 @@ function FullPost({
     }
   };
   
+  const isPostSaveAsFav = async () => {
+    try {
+      const res = await axios.get('https://api.thecatapi.com/v1/favourites',{headers: header});
+      const isPostSaved= res.data.find((element => element.image_id == id));
+      setIsPostSavedByUser(isPostSaved);
+      console.log(isPostSaved);
+
+      return isPostSaved;
+     
+
+    } catch(err) {
+      console.log(err)
+    }
+  }
 
   const onChangeVotePost = (value) => {
     fullPost.voteValue = value;
@@ -101,17 +121,26 @@ function FullPost({
         <Post
           url={fullPost.url}
           key={fullPost}
-          id={fullPost.id} // fullPost.id
-          postIndex={fullPost} // etc
+          id={fullPost.id} 
+          postIndex={fullPost}
           balance={fullPost.balance}
           changeVoteValue={onChangeVotePost}
           definitiveVoteValue={fullPost.voteValue}
+          isFavActive={fullPost.isFavActive}
         >
           <p className="ids">
             {balance}
           </p>
           <p>{definitiveVoteValue}</p>
-          <Favourite id={fullPost.id} user={user} />
+          <Favourite 
+            id={fullPost.id} 
+            user={user}
+            isFavActive={fullPost.isFavActive}
+           
+          
+            /> 
+          
+             {/* isFavActive={isFavActive} */}
         </Post>
       </DetailBox>
 
