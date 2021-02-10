@@ -38,7 +38,7 @@ function Favourite({
     'x-api-key': '88fe8df0-65c3-4f4e-99af-18a603cecf8e',
   };
   const data = {
-    image_id: `${id}`,
+    image_id: `${idImage}`,
     sub_id: `${user}`,
   };
   const classes = useStyles();
@@ -49,8 +49,7 @@ function Favourite({
   const addFavoritePost = () => {
     axios.post('https://api.thecatapi.com/v1/favourites', data, { headers: header })
       .then((res) => {
-        setIdFavorite(res.data.id); 
-        onFavClick();
+        onFavClick(res.data.id);
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +60,7 @@ function Favourite({
   const deleteFavouritePost = () => {
     axios.delete(`https://api.thecatapi.com/v1/favourites/${id}`, { headers: header })
       .then((res) => {
+        onFavClick();
         console.log(res.data);
         //actualizar el valor de isFavActive
       })

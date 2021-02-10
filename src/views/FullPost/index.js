@@ -25,6 +25,7 @@ function FullPost({
   // const [isFavActive, setIsFavActive] = useState ();
   // const [result, setResult] = useState(balance); // 01
   // const [votesByUser, setVotesByUser] = useState([{}]);
+  const [favorite, setFavorite] = useState([{}])
 
   const user = 'my-user-1234';
 
@@ -35,19 +36,17 @@ function FullPost({
         votesOfFullPost(res.data)
           .then(async(fetchedVotes) => {
             let responseIsFavorite = await isPostSaveAsFav(id) //? 
-            // console.log(res.data, 'image');
-            // console.log(fetchedVotes, 'votes');
             const indexPostVoted = fetchedVotes.findIndex((item) => (item.image_id === id && item.sub_id === user));
             const isPostVoted = indexPostVoted >= 0;
-            // isPostSaveAsFav(id); //? 
             setFullPost({
+              idFav : responseIsFavorite ? responseIsFavorite.id : undefined,
               height: res.data.height,
               id: res.data.id,
               url: res.data.url,
               width: res.data.width,
               isFavActive: !!responseIsFavorite,
-              isVotesByCurrentUser: isPostVoted, // guardar en esta variable si la imagen fue votada (true) o no (false)
-              voteValue: isPostVoted ? !!fetchedVotes[indexPostVoted].value : null, // guardar en esta variable si el voto es positivo (true) o negativo (false)
+              isVotesByCurrentUser: isPostVoted, 
+              voteValue: isPostVoted ? !!fetchedVotes[indexPostVoted].value : null, 
               balance: fetchedVotes.filter((vote) => vote.image_id === id).reduce((acc, curr) => {
                 if (curr.value) {
                   acc += 1;
@@ -55,7 +54,7 @@ function FullPost({
                   acc -= 1;
                 }
                 return acc;
-              }, 0), // guardar en esta variable la cantidad total de votos que tiene esta imagen
+              }, 0),
             });
           });
       })
@@ -65,7 +64,7 @@ function FullPost({
       });
   }, []);
   
-  console.log(fullPost.isFavActive);
+  console.log(fullPost);
 
 
 
@@ -73,6 +72,7 @@ function FullPost({
     try {
       const res = await axios.get('https://api.thecatapi.com/v1/votes?limit=100000', { headers: header });
       setVotesFullPost(res.data);
+      console.log(res.data);
       // getVoteBalance();
       return res.data;
     } catch (err) {
@@ -83,16 +83,30 @@ function FullPost({
   const isPostSaveAsFav = async () => {
     try {
       const res = await axios.get('https://api.thecatapi.com/v1/favourites',{headers: header});
+      console.log(res.data);
       const isPostSaved= res.data.find((element => element.image_id == id));
-      console.log('isPostSaved', isPostSaved);
+      const idFavorite = isPostSaved.id;
+      console.log('isPostSaved', isPostSaved, 'ids',   idFavorite);
+      // setFavorite({
 
+      //   //podria utilizar? ...fullPost
+      //   id : idFavorite,
+      //   idImage : isPostSaved.image_id,
+      //   isFavActive : isPostSaved
+
+      // })
       return isPostSaved;
+    
      
 
     } catch(err) {
       console.log(err)
     }
   }
+  
+  console.log(favorite);
+
+  
 
   const onChangeVotePost = (value) => {
     fullPost.voteValue = value;
@@ -104,13 +118,38 @@ function FullPost({
   const handleClick = () => {
     history.goBack();
   };
-  const handleFavClick = () => {
-    setFullPost({
-      ...fullPost,
-      isFavActive: true
-    })
+  // const handleFavClick = () => {
+  //   setFullPost({
+  //     ...fullPost,
+  //     isFavActive: true
+  //   })
+
+  // }
+
+  const handleFavClick = (event, idF) => {
+    console.log(event);
+    let value = event;
+    if(value){
+      setFullPost({
+        ...fullPost,
+        isFavActive:false,
+        idFav: undefined
+      })
+    }
+    else
+    {
+      setFullPost({
+        ...fullPost,
+        isFavActive: true,
+        idFav: idF
+      })
+    }
+  
 
   }
+
+
+
 
   
   return (
@@ -145,17 +184,17 @@ function FullPost({
           </p>
           <p>{definitiveVoteValue}</p>
           <Favourite 
-            id={fullPost.id} 
+            id={fullPost.idFav}
+            idImage={fullPost.id} 
             user={user}
             isFavActive={fullPost.isFavActive}
-            onFavClick={handleFavClick}
-          
-        
-           
+            // onFavClick={handleFavClick}
+            onFavClick={function onFavAction(e){handleFavClick(fullPost.isFavActive, e);}}
+            // onFavClick={(e)=>{handleFavClick(fullPost.isFavActive, e);}}
+    
           
             /> 
-          
-             {/* isFavActive={isFavActive} */}
+       
         </Post>
       </DetailBox>
 
