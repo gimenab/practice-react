@@ -24,6 +24,7 @@ import ListIcon from '@material-ui/icons/List';
 import Label from 'src/components/Label';
 import PetsIcon from '@material-ui/icons/Pets';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 
 
 export default [
@@ -34,6 +35,11 @@ export default [
         title: 'Overview',
         href: '/overview',
         icon: HomeIcon
+      },
+      {
+        title: 'Tasks',
+        href: '/tasks',
+        icon: AssignmentTurnedInIcon
       },
       {
         title: 'CatUniverse',

@@ -12,6 +12,7 @@ import PresentationView from './views/Presentation';
 import CatUniverse from './views/CatUniverse';
 
 
+
 export default [
   {
     path: '/',
@@ -87,6 +88,11 @@ export default [
         component: lazy(() => import('src/views/Breed'))
       },
       {
+        path: '/handlingorder/:idOrder',
+        exact:true,
+        component : lazy(()=> import('src/views/HandlingOrder'))
+      },
+      {
         path: '/changelog',
         exact: true,
         component: lazy(() => import('src/views/Changelog'))
@@ -155,6 +161,12 @@ export default [
         path: '/favorites',
         exact: true,
         component: lazy(() => import('src/views/Favorites'))
+      },
+      {
+        path: '/tasks',
+        exact: true,
+        component: lazy(() => import('src/views/Tasks'))
+
       },
       {
         path: '/invoices/:id',
