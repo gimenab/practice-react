@@ -6,6 +6,7 @@
 
 .link-button{
     margin: 1rem;
+    padding: 6px 20px;
 }
 
 h3, h4 {
@@ -17,7 +18,7 @@ h3, h4 {
 }
 .help-information{
     padding: 5%;
-    width: 70%;
+    width: 100%;
 }
 .button-section{
     display: flex;
@@ -31,7 +32,19 @@ p{
 }
 @media (min-width: 768px) { 
     .container{
-        display: flex;
+        // display: flex;
         }
    
 }
+
+
+// styles
+.components{
+    width: 100%;
+    display: flex;
+    padding:5%;
+    
+    
+
+}
+

@@ -7,7 +7,7 @@
 
 .help-information{
     padding: 5%;
-    width: 70%;
+    width: 100%;
 }
 
 h2, h3, h4 {
@@ -20,16 +20,15 @@ p{
     color: #263238;
 
 }
-.help-information{
-    padding: 5%;
-}
+
 .button-section{
-    margin-top: 1rem;
+    display: flex;
 }
 
 .link-button{
     margin: 1rem;
     display: block;
+    padding: 6px 20px;
 }
 .response{
     width: 70%;
@@ -45,3 +44,13 @@ h3, h4 {
     font-size: 1.2rem;
     font-weight: bolder;
 }
+.order{
+    margin: 2%;
+}
+
+.section{
+    max-width: 50%;
+    padding: 3%;
+    margin:3%;
+}
+
